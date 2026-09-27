@@ -1,0 +1,36 @@
+services:
+
+  postgres:
+    image: postgres:16
+    container_name: vehicle_postgres
+    environment:
+      POSTGRES_USER: vehicle_user
+      POSTGRES_PASSWORD: vehicle_password
+      POSTGRES_DB: vehicle_tracking
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  mqtt:
+    image: eclipse-mosquitto:2
+    container_name: vehicle_mqtt
+    ports:
+      - "1883:1883"
+      - "9001:9001"
+
+  backend:
+    build: .
+    container_name: vehicle_backend
+    ports:
+      - "8000:8000"
+    depends_on:
+      - postgres
+      - mqtt
+    environment:
+      DATABASE_URL: postgresql://vehicle_user:vehicle_password@postgres:5432/vehicle_tracking
+      MQTT_BROKER: mqtt
+      MQTT_PORT: 1883
+
+volumes:
+  postgres_data:

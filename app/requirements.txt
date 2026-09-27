@@ -1,0 +1,10 @@
+from fastapi import FastAPI
+
+app = FastAPI(title="Vehicle Tracking API")
+
+
+@app.get("/")
+def root():
+    return {
+        "message": "Vehicle Tracking API is running"
+    }
