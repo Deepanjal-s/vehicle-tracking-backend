@@ -44,29 +44,16 @@ GET `/me/vehicle/history`
 
 GET `/me/vehicle/{vehicle_id}`
 
-## Test Users
+## Local accounts
 
-### User A
-
-Email: `a@test.com`
-
-Password: `password123`
-
-Vehicle: `BUS-001`
-
-Route: `Route A`
-
-### User B
-
-Email: `b@test.com`
-
-Password: `password123`
-
-Vehicle: `BUS-002`
-
-Route: `Route B`
+Use accounts configured in your local development database. Keep passwords out of public documentation and use unique credentials for any deployed instance.
 
 ## Run with Docker
 
 ```bash
 docker compose up -d --build
+```
+
+## Companion application
+
+The [Flutter client](https://github.com/Deepanjal-s/vehicle-tracking-flutter) displays assigned routes, vehicle details, latest location, and GPS history. See its README for client setup and local API connection limitations.
